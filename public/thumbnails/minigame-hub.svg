@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <defs>
+    <linearGradient id="mini-bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#030712"/>
+      <stop offset="50%" stop-color="#0c1a33"/>
+      <stop offset="100%" stop-color="#030c1a"/>
+    </linearGradient>
+    <radialGradient id="mini-glow1" cx="25%" cy="50%" r="30%">
+      <stop offset="0%" stop-color="#0ea5e9" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#0ea5e9" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="mini-glow2" cx="75%" cy="50%" r="30%">
+      <stop offset="0%" stop-color="#06b6d4" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#06b6d4" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1920" height="1080" fill="url(#mini-bg)"/>
+  <rect width="1920" height="1080" fill="url(#mini-glow1)"/>
+  <rect width="1920" height="1080" fill="url(#mini-glow2)"/>
+  <!-- Grid lines - like an arena grid -->
+  <line x1="0" y1="270" x2="1920" y2="270" stroke="#0ea5e9" stroke-width="1" opacity="0.15"/>
+  <line x1="0" y1="540" x2="1920" y2="540" stroke="#0ea5e9" stroke-width="1" opacity="0.15"/>
+  <line x1="0" y1="810" x2="1920" y2="810" stroke="#0ea5e9" stroke-width="1" opacity="0.15"/>
+  <line x1="480" y1="0" x2="480" y2="1080" stroke="#0ea5e9" stroke-width="1" opacity="0.15"/>
+  <line x1="960" y1="0" x2="960" y2="1080" stroke="#0ea5e9" stroke-width="1" opacity="0.15"/>
+  <line x1="1440" y1="0" x2="1440" y2="1080" stroke="#0ea5e9" stroke-width="1" opacity="0.15"/>
+  <!-- Game icons (abstract) -->
+  <circle cx="300" cy="540" r="80" fill="none" stroke="#0ea5e9" stroke-width="3" opacity="0.25"/>
+  <circle cx="1620" cy="540" r="80" fill="none" stroke="#06b6d4" stroke-width="3" opacity="0.25"/>
+  <rect x="880" y="100" width="160" height="160" fill="none" stroke="#0ea5e9" stroke-width="3" opacity="0.2" rx="20"/>
+  <rect x="880" y="820" width="160" height="160" fill="none" stroke="#06b6d4" stroke-width="3" opacity="0.2" rx="20"/>
+  <!-- Title -->
+  <text x="960" y="490" font-family="system-ui, sans-serif" font-size="152" font-weight="900" fill="white" text-anchor="middle" letter-spacing="8">MINIGAME HUB</text>
+  <text x="960" y="590" font-family="system-ui, sans-serif" font-size="34" font-weight="400" fill="#bae6fd" text-anchor="middle" letter-spacing="3">20+ Games · Weekly Events · Leaderboards</text>
+</svg>

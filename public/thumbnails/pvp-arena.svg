@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <defs>
+    <linearGradient id="pvp-bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0a0000"/>
+      <stop offset="50%" stop-color="#3b0000"/>
+      <stop offset="100%" stop-color="#1a0000"/>
+    </linearGradient>
+    <radialGradient id="pvp-fire" cx="50%" cy="80%" r="60%">
+      <stop offset="0%" stop-color="#f97316" stop-opacity="0.5"/>
+      <stop offset="50%" stop-color="#b91c1c" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#000" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1920" height="1080" fill="url(#pvp-bg)"/>
+  <rect width="1920" height="1080" fill="url(#pvp-fire)"/>
+  <!-- Embers / sparks -->
+  <circle cx="400" cy="900" r="4" fill="#f97316" opacity="0.9"/>
+  <circle cx="650" cy="800" r="3" fill="#fb923c" opacity="0.7"/>
+  <circle cx="900" cy="850" r="5" fill="#f97316" opacity="0.8"/>
+  <circle cx="1200" cy="780" r="3" fill="#fbbf24" opacity="0.6"/>
+  <circle cx="1450" cy="860" r="4" fill="#f97316" opacity="0.9"/>
+  <circle cx="1700" cy="820" r="3" fill="#fb923c" opacity="0.7"/>
+  <circle cx="300" cy="700" r="2" fill="#fbbf24" opacity="0.5"/>
+  <circle cx="1600" cy="720" r="2" fill="#fbbf24" opacity="0.5"/>
+  <!-- Arena floor line -->
+  <rect x="0" y="860" width="1920" height="6" fill="#7f1d1d" opacity="0.6"/>
+  <!-- Sword icons -->
+  <rect x="830" y="280" width="12" height="160" fill="#9ca3af" opacity="0.4"/>
+  <rect x="814" y="310" width="44" height="10" fill="#9ca3af" opacity="0.4"/>
+  <rect x="830" y="280" width="12" height="30" fill="#d97706" opacity="0.4"/>
+  <rect x="1078" y="280" width="12" height="160" fill="#9ca3af" opacity="0.4" transform="rotate(60 1084 360)"/>
+  <!-- Title -->
+  <text x="960" y="510" font-family="system-ui, sans-serif" font-size="168" font-weight="900" fill="white" text-anchor="middle" letter-spacing="12">PvP ARENA</text>
+  <text x="960" y="390" font-family="system-ui, sans-serif" font-size="38" font-weight="700" fill="#f97316" text-anchor="middle" letter-spacing="12">⚔  COMPETITIVE</text>
+  <text x="960" y="610" font-family="system-ui, sans-serif" font-size="32" font-weight="400" fill="#fed7aa" text-anchor="middle" letter-spacing="3">16 Arenas · Ranked Matchmaking · Custom Kits</text>
+</svg>

@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <defs>
+    <linearGradient id="s-sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1c0f00"/>
+      <stop offset="40%" stop-color="#78350f"/>
+      <stop offset="75%" stop-color="#92400e"/>
+      <stop offset="100%" stop-color="#451a03"/>
+    </linearGradient>
+    <radialGradient id="s-sun" cx="30%" cy="35%" r="22%">
+      <stop offset="0%" stop-color="#fef08a" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#fef08a" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1920" height="1080" fill="url(#s-sky)"/>
+  <rect width="1920" height="1080" fill="url(#s-sun)"/>
+  <circle cx="576" cy="374" r="80" fill="#fef08a" opacity="0.2"/>
+  <polygon points="0,900 280,420 560,900" fill="#292524"/>
+  <polygon points="180,900 560,360 940,900" fill="#1c1917"/>
+  <polygon points="880,900 1180,430 1480,900" fill="#292524"/>
+  <polygon points="1280,900 1580,390 1920,900" fill="#1c1917"/>
+  <rect x="0" y="870" width="1920" height="210" fill="#292524"/>
+  <rect x="0" y="850" width="1920" height="28" fill="#57534e"/>
+  <rect x="0" y="862" width="1920" height="14" fill="#78716c"/>
+</svg>

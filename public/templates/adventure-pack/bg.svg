@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <defs>
+    <linearGradient id="a-sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0c2a1a"/>
+      <stop offset="55%" stop-color="#14532d"/>
+      <stop offset="100%" stop-color="#166534"/>
+    </linearGradient>
+  </defs>
+  <rect width="1920" height="1080" fill="url(#a-sky)"/>
+  <circle cx="1700" cy="160" r="70" fill="#d1fae5" opacity="0.2"/>
+  <circle cx="120" cy="80" r="2.5" fill="#fff" opacity="0.7"/>
+  <circle cx="380" cy="130" r="2" fill="#fff" opacity="0.6"/>
+  <circle cx="700" cy="60" r="2" fill="#fff" opacity="0.7"/>
+  <circle cx="1100" cy="95" r="2.5" fill="#fff" opacity="0.5"/>
+  <circle cx="1500" cy="50" r="2" fill="#fff" opacity="0.6"/>
+  <!-- Tree silhouettes left -->
+  <rect x="0" y="560" width="100" height="520" fill="#052e16"/>
+  <rect x="20" y="440" width="60" height="160" fill="#052e16"/>
+  <rect x="0" y="400" width="100" height="80" fill="#052e16"/>
+  <rect x="100" y="620" width="120" height="460" fill="#064e3b"/>
+  <rect x="120" y="500" width="80" height="160" fill="#064e3b"/>
+  <rect x="100" y="460" width="120" height="80" fill="#064e3b"/>
+  <!-- Tree silhouettes right -->
+  <rect x="1720" y="580" width="100" height="500" fill="#052e16"/>
+  <rect x="1740" y="460" width="60" height="160" fill="#052e16"/>
+  <rect x="1720" y="420" width="100" height="80" fill="#052e16"/>
+  <rect x="1820" y="640" width="100" height="440" fill="#064e3b"/>
+  <!-- Ground -->
+  <rect x="0" y="860" width="1920" height="220" fill="#14532d"/>
+  <rect x="0" y="840" width="1920" height="30" fill="#16a34a" opacity="0.8"/>
+</svg>

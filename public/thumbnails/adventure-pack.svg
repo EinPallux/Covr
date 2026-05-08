@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <defs>
+    <linearGradient id="adv-sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0c2a1a"/>
+      <stop offset="60%" stop-color="#14532d"/>
+      <stop offset="100%" stop-color="#166534"/>
+    </linearGradient>
+    <linearGradient id="adv-glow" x1="0.5" y1="0" x2="0.5" y2="1">
+      <stop offset="0%" stop-color="#10b981" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#10b981" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <!-- Sky -->
+  <rect width="1920" height="1080" fill="url(#adv-sky)"/>
+  <!-- Stars -->
+  <circle cx="120" cy="80" r="2" fill="#fff" opacity="0.6"/>
+  <circle cx="340" cy="140" r="1.5" fill="#fff" opacity="0.5"/>
+  <circle cx="680" cy="60" r="2" fill="#fff" opacity="0.7"/>
+  <circle cx="1100" cy="100" r="1.5" fill="#fff" opacity="0.5"/>
+  <circle cx="1450" cy="55" r="2" fill="#fff" opacity="0.6"/>
+  <circle cx="1780" cy="120" r="1.5" fill="#fff" opacity="0.4"/>
+  <circle cx="900" cy="45" r="1" fill="#fff" opacity="0.8"/>
+  <circle cx="1600" cy="85" r="1" fill="#fff" opacity="0.6"/>
+  <!-- Moon -->
+  <circle cx="1700" cy="160" r="60" fill="#d1fae5" opacity="0.25"/>
+  <!-- Tree silhouettes (pixel-style) -->
+  <rect x="0" y="600" width="80" height="480" fill="#052e16"/>
+  <rect x="20" y="480" width="40" height="160" fill="#052e16"/>
+  <rect x="0" y="440" width="80" height="80" fill="#052e16"/>
+  <rect x="80" y="700" width="100" height="380" fill="#064e3b"/>
+  <rect x="100" y="560" width="60" height="180" fill="#064e3b"/>
+  <rect x="80" y="520" width="100" height="80" fill="#064e3b"/>
+  <rect x="1740" y="640" width="80" height="440" fill="#052e16"/>
+  <rect x="1760" y="500" width="40" height="180" fill="#052e16"/>
+  <rect x="1740" y="460" width="80" height="80" fill="#052e16"/>
+  <rect x="1820" y="680" width="100" height="400" fill="#064e3b"/>
+  <!-- Ground -->
+  <rect x="0" y="840" width="1920" height="240" fill="#14532d"/>
+  <rect x="0" y="820" width="1920" height="40" fill="#16a34a"/>
+  <!-- Glow center -->
+  <rect x="460" y="200" width="1000" height="500" fill="url(#adv-glow)"/>
+  <!-- Title text -->
+  <text x="960" y="490" font-family="system-ui, sans-serif" font-size="130" font-weight="900" fill="white" text-anchor="middle" letter-spacing="6">ADVENTURE PACK</text>
+  <text x="960" y="380" font-family="system-ui, sans-serif" font-size="46" font-weight="400" fill="#86efac" text-anchor="middle" letter-spacing="8">Explore New Worlds</text>
+</svg>

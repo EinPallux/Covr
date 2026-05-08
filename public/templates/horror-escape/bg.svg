@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <defs>
+    <radialGradient id="h-vignette" cx="50%" cy="50%" r="65%">
+      <stop offset="0%" stop-color="#1a001a" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.95"/>
+    </radialGradient>
+    <radialGradient id="h-glow" cx="50%" cy="50%" r="35%">
+      <stop offset="0%" stop-color="#9f1239" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#9f1239" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1920" height="1080" fill="#03000a"/>
+  <rect width="1920" height="1080" fill="url(#h-glow)"/>
+  <rect width="1920" height="1080" fill="url(#h-vignette)"/>
+  <line x1="840" y1="0" x2="920" y2="320" stroke="#1a0010" stroke-width="4" opacity="0.7"/>
+  <line x1="920" y1="320" x2="860" y2="620" stroke="#1a0010" stroke-width="3" opacity="0.6"/>
+  <line x1="1080" y1="0" x2="1000" y2="300" stroke="#1a0010" stroke-width="4" opacity="0.7"/>
+  <rect x="420" y="0" width="4" height="180" fill="#9f1239" opacity="0.4"/>
+  <rect x="960" y="0" width="3" height="160" fill="#9f1239" opacity="0.3"/>
+  <rect x="1500" y="0" width="4" height="200" fill="#9f1239" opacity="0.4"/>
+  <circle cx="200" cy="900" r="18" fill="#9f1239" opacity="0.22"/>
+  <circle cx="1700" cy="880" r="22" fill="#9f1239" opacity="0.22"/>
+</svg>

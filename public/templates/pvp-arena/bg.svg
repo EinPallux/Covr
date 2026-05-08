@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <defs>
+    <linearGradient id="p-bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0a0000"/>
+      <stop offset="50%" stop-color="#3b0000"/>
+      <stop offset="100%" stop-color="#1a0000"/>
+    </linearGradient>
+    <radialGradient id="p-fire" cx="50%" cy="85%" r="55%">
+      <stop offset="0%" stop-color="#f97316" stop-opacity="0.55"/>
+      <stop offset="60%" stop-color="#b91c1c" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#000" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1920" height="1080" fill="url(#p-bg)"/>
+  <rect width="1920" height="1080" fill="url(#p-fire)"/>
+  <circle cx="400" cy="920" r="5" fill="#f97316" opacity="0.9"/>
+  <circle cx="650" cy="820" r="3" fill="#fb923c" opacity="0.8"/>
+  <circle cx="900" cy="880" r="6" fill="#f97316" opacity="0.7"/>
+  <circle cx="1200" cy="800" r="4" fill="#fbbf24" opacity="0.7"/>
+  <circle cx="1450" cy="870" r="5" fill="#f97316" opacity="0.9"/>
+  <circle cx="1700" cy="840" r="3" fill="#fb923c" opacity="0.8"/>
+  <circle cx="200" cy="700" r="3" fill="#fbbf24" opacity="0.5"/>
+  <circle cx="1700" cy="720" r="3" fill="#fbbf24" opacity="0.5"/>
+  <rect x="0" y="870" width="1920" height="6" fill="#7f1d1d" opacity="0.7"/>
+  <rect x="0" y="876" width="1920" height="204" fill="#1a0000"/>
+</svg>

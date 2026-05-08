@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <defs>
+    <linearGradient id="cre-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0f0022"/>
+      <stop offset="50%" stop-color="#2e1065"/>
+      <stop offset="100%" stop-color="#1a0033"/>
+    </linearGradient>
+    <radialGradient id="cre-glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#a855f7" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#a855f7" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1920" height="1080" fill="url(#cre-bg)"/>
+  <rect width="1920" height="1080" fill="url(#cre-glow)"/>
+  <!-- Floating blocks - Minecraft aesthetic -->
+  <rect x="200" y="200" width="60" height="60" fill="#7c3aed" opacity="0.6" rx="4"/>
+  <rect x="300" y="350" width="40" height="40" fill="#a855f7" opacity="0.5" rx="4"/>
+  <rect x="1600" y="180" width="60" height="60" fill="#7c3aed" opacity="0.6" rx="4"/>
+  <rect x="1700" y="320" width="40" height="40" fill="#a855f7" opacity="0.5" rx="4"/>
+  <rect x="1550" y="700" width="50" height="50" fill="#6d28d9" opacity="0.4" rx="4"/>
+  <rect x="250" y="700" width="50" height="50" fill="#6d28d9" opacity="0.4" rx="4"/>
+  <!-- Color palette strips at bottom -->
+  <rect x="0" y="980" width="274" height="100" fill="#ef4444" opacity="0.5"/>
+  <rect x="274" y="980" width="274" height="100" fill="#f97316" opacity="0.5"/>
+  <rect x="548" y="980" width="274" height="100" fill="#eab308" opacity="0.5"/>
+  <rect x="822" y="980" width="274" height="100" fill="#22c55e" opacity="0.5"/>
+  <rect x="1096" y="980" width="274" height="100" fill="#3b82f6" opacity="0.5"/>
+  <rect x="1370" y="980" width="275" height="100" fill="#a855f7" opacity="0.5"/>
+  <rect x="1645" y="980" width="275" height="100" fill="#ec4899" opacity="0.5"/>
+  <!-- Accent bar -->
+  <rect x="0" y="522" width="1920" height="8" fill="#a855f7"/>
+  <!-- Title -->
+  <text x="960" y="490" font-family="system-ui, sans-serif" font-size="140" font-weight="900" fill="white" text-anchor="middle" letter-spacing="8">CREATIVE STUDIO</text>
+  <text x="960" y="590" font-family="system-ui, sans-serif" font-size="52" font-weight="400" fill="#d8b4fe" text-anchor="middle" letter-spacing="4">Build Without Limits</text>
+</svg>

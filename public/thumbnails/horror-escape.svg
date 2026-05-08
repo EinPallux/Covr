@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <defs>
+    <radialGradient id="hor-vignette" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#1a001a" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="1"/>
+    </radialGradient>
+    <radialGradient id="hor-red-glow" cx="50%" cy="50%" r="40%">
+      <stop offset="0%" stop-color="#9f1239" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#9f1239" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <!-- Void black base -->
+  <rect width="1920" height="1080" fill="#03000a"/>
+  <rect width="1920" height="1080" fill="url(#hor-red-glow)"/>
+  <rect width="1920" height="1080" fill="url(#hor-vignette)"/>
+  <!-- Cracked stone texture (abstract lines) -->
+  <line x1="840" y1="0" x2="920" y2="300" stroke="#1a0010" stroke-width="3" opacity="0.6"/>
+  <line x1="920" y1="300" x2="860" y2="600" stroke="#1a0010" stroke-width="2" opacity="0.5"/>
+  <line x1="1080" y1="0" x2="1000" y2="280" stroke="#1a0010" stroke-width="3" opacity="0.6"/>
+  <line x1="1000" y1="280" x2="1060" y2="560" stroke="#1a0010" stroke-width="2" opacity="0.5"/>
+  <!-- Drip effects -->
+  <rect x="420" y="0" width="4" height="200" fill="#9f1239" opacity="0.4"/>
+  <rect x="960" y="0" width="3" height="180" fill="#9f1239" opacity="0.3"/>
+  <rect x="1500" y="0" width="4" height="220" fill="#9f1239" opacity="0.4"/>
+  <!-- Blood splatter (abstract circles) -->
+  <circle cx="200" cy="900" r="20" fill="#9f1239" opacity="0.25"/>
+  <circle cx="220" cy="915" r="10" fill="#9f1239" opacity="0.2"/>
+  <circle cx="1700" cy="880" r="25" fill="#9f1239" opacity="0.25"/>
+  <!-- Title -->
+  <text x="960" y="510" font-family="system-ui, sans-serif" font-size="136" font-weight="900" fill="#fafafa" text-anchor="middle" letter-spacing="6">HORROR ESCAPE</text>
+  <text x="960" y="400" font-family="system-ui, sans-serif" font-size="40" font-weight="700" fill="#9f1239" text-anchor="middle" letter-spacing="14">CAN YOU SURVIVE?</text>
+  <text x="960" y="610" font-family="system-ui, sans-serif" font-size="30" font-weight="400" fill="#fda4af" text-anchor="middle" letter-spacing="2" opacity="0.7">5 Terrifying Maps · Jump Scares · Multiplayer Horror</text>
+</svg>
