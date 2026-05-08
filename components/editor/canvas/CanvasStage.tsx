@@ -1,11 +1,12 @@
 'use client'
 
-import { useRef, useCallback } from 'react'
+import { useRef, useCallback, useEffect } from 'react'
 import { Stage, Layer } from 'react-konva'
 import type Konva from 'konva'
 import { useEditorStore } from '@/lib/store/editorStore'
 import { useUIStore } from '@/lib/store/uiStore'
 import { withHistory } from '@/lib/store/historyStore'
+import { stageRegistry } from '@/lib/export/stageRegistry'
 import type { Layer as EditorLayer, ShapeLayer } from '@/lib/templates/schema'
 import TextLayerNode from './TextLayerNode'
 import ImageLayerNode from './ImageLayerNode'
@@ -21,6 +22,12 @@ interface Props {
 
 export default function CanvasStage({ zoom }: Props) {
   const stageRef = useRef<Konva.Stage>(null)
+
+  // Register the stage so the export function can access it without prop drilling
+  useEffect(() => {
+    if (stageRef.current) stageRegistry.set(stageRef.current)
+    return () => stageRegistry.set(null)
+  }, [])
 
   const {
     layers,

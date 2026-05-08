@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import type { Template } from '@/lib/templates/schema'
 import { useEditorStore } from '@/lib/store/editorStore'
 import { useHistoryStore } from '@/lib/store/historyStore'
@@ -9,6 +9,7 @@ import Toolbar from './Toolbar'
 import CanvasArea from './CanvasArea'
 import LayerPanel from './panels/LayerPanel'
 import PropertiesPanel from './panels/PropertiesPanel'
+import ExportDialog from './ExportDialog'
 
 interface Props {
   template: Template
@@ -17,25 +18,29 @@ interface Props {
 export default function EditorShell({ template }: Props) {
   const { loadTemplate } = useEditorStore()
   const { clear: clearHistory } = useHistoryStore()
+  const [exportOpen, setExportOpen] = useState(false)
 
-  // Register all keyboard shortcuts
   useKeyboardShortcuts()
 
-  // Load template into editor state on mount
   useEffect(() => {
     loadTemplate(template)
     clearHistory()
   }, [template, loadTemplate, clearHistory])
 
+  const openExport = useCallback(() => setExportOpen(true), [])
+  const closeExport = useCallback(() => setExportOpen(false), [])
+
   return (
     <div className="flex h-screen flex-col overflow-hidden bg-zinc-950">
-      <Toolbar templateName={template.name} />
+      <Toolbar templateName={template.name} onExportClick={openExport} />
 
       <div className="flex flex-1 overflow-hidden">
         <LayerPanel />
         <CanvasArea />
         <PropertiesPanel />
       </div>
+
+      {exportOpen && <ExportDialog onClose={closeExport} />}
     </div>
   )
 }

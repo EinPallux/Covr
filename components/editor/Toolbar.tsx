@@ -23,9 +23,10 @@ import Button from '@/components/ui/Button'
 
 interface Props {
   templateName?: string
+  onExportClick: () => void
 }
 
-export default function Toolbar({ templateName }: Props) {
+export default function Toolbar({ templateName, onExportClick }: Props) {
   const {
     zoom,
     zoomIn,
@@ -140,7 +141,7 @@ export default function Toolbar({ templateName }: Props) {
       <Separator />
 
       {/* ── Export ────────────────────────────────────── */}
-      <Button variant="primary" size="sm" icon={Download}>
+      <Button variant="primary" size="sm" icon={Download} onClick={onExportClick}>
         Export
       </Button>
     </div>
