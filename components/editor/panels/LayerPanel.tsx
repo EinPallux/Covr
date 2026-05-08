@@ -1,6 +1,6 @@
 'use client'
 
-import { useCallback } from 'react'
+import { useCallback, useRef, useState, useEffect } from 'react'
 import {
   DndContext,
   closestCenter,
@@ -32,6 +32,7 @@ import {
 import { useEditorStore } from '@/lib/store/editorStore'
 import { useUIStore } from '@/lib/store/uiStore'
 import { withHistory } from '@/lib/store/historyStore'
+import { makeTextLayer, makeImageLayer, makeShapeLayer } from '@/lib/templates/schema'
 import type { Layer } from '@/lib/templates/schema'
 import IconButton from '@/components/ui/IconButton'
 import { cn } from '@/lib/utils/cn'
@@ -49,6 +50,59 @@ const TYPE_COLORS = {
   image: 'text-violet-400',
   shape: 'text-amber-400',
 } as const
+
+// ─── Add Layer Menu ───────────────────────────────────────────────────────────
+
+interface AddLayerMenuProps {
+  onClose: () => void
+}
+
+function AddLayerMenu({ onClose }: AddLayerMenuProps) {
+  const { addLayer } = useEditorStore()
+  const menuRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(e.target as Node)) onClose()
+    }
+    document.addEventListener('mousedown', handler)
+    return () => document.removeEventListener('mousedown', handler)
+  }, [onClose])
+
+  const add = (layer: Omit<Layer, 'id'>) => {
+    withHistory(() => addLayer(layer))
+    onClose()
+  }
+
+  return (
+    <div
+      ref={menuRef}
+      className="absolute right-0 top-full z-50 mt-1 w-36 overflow-hidden rounded border border-zinc-700 bg-zinc-800 shadow-xl"
+    >
+      <button
+        className="flex w-full items-center gap-2 px-3 py-2 text-xs text-zinc-300 hover:bg-zinc-700"
+        onClick={() => add(makeTextLayer())}
+      >
+        <Type className="h-3.5 w-3.5 text-blue-400" />
+        Text layer
+      </button>
+      <button
+        className="flex w-full items-center gap-2 px-3 py-2 text-xs text-zinc-300 hover:bg-zinc-700"
+        onClick={() => add(makeImageLayer())}
+      >
+        <ImageIcon className="h-3.5 w-3.5 text-violet-400" />
+        Image layer
+      </button>
+      <button
+        className="flex w-full items-center gap-2 px-3 py-2 text-xs text-zinc-300 hover:bg-zinc-700"
+        onClick={() => add(makeShapeLayer())}
+      >
+        <Square className="h-3.5 w-3.5 text-amber-400" />
+        Shape layer
+      </button>
+    </div>
+  )
+}
 
 // ─── Sortable layer item ───────────────────────────────────────────────────────
 
@@ -156,6 +210,7 @@ function SortableLayerItem({ layer, isSelected }: LayerItemProps) {
 export default function LayerPanel() {
   const { layers, selectedIds, reorderLayers } = useEditorStore()
   const { panels } = useUIStore()
+  const [showAddMenu, setShowAddMenu] = useState(false)
 
   // Panel shows layers top→bottom (highest index = top of canvas = top of panel)
   const displayLayers = [...layers].reverse()
@@ -195,9 +250,16 @@ export default function LayerPanel() {
         <span className="text-[11px] font-semibold uppercase tracking-widest text-zinc-500">
           Layers
         </span>
-        <div className="flex items-center gap-1">
+        <div className="relative flex items-center gap-1">
           <span className="text-[10px] text-zinc-700 tabular-nums">{layers.length}</span>
-          <IconButton icon={Plus} size="xs" tooltip="Add layer (coming soon)" />
+          <IconButton
+            icon={Plus}
+            size="xs"
+            tooltip="Add layer"
+            active={showAddMenu}
+            onClick={() => setShowAddMenu((v) => !v)}
+          />
+          {showAddMenu && <AddLayerMenu onClose={() => setShowAddMenu(false)} />}
         </div>
       </div>
 

@@ -11,6 +11,7 @@ interface EditorState {
 
 interface EditorActions {
   loadTemplate: (template: Template) => void
+  addLayer: (layer: Omit<Layer, 'id'>) => void
   updateLayer: (id: string, patch: Partial<Layer>) => void
   reorderLayers: (fromIndex: number, toIndex: number) => void
   setSelectedIds: (ids: string[]) => void
@@ -41,6 +42,15 @@ export const useEditorStore = create<EditorState & EditorActions>((set, get) => 
       selectedIds: [],
       editingTextId: null,
     })
+  },
+
+  addLayer: (layerWithoutId) => {
+    const newLayer = { ...layerWithoutId, id: generateId() } as Layer
+    set((state) => ({
+      // Insert above the topmost currently selected layer, or at the top
+      layers: [...state.layers, newLayer],
+      selectedIds: [newLayer.id],
+    }))
   },
 
   updateLayer: (id, patch) => {
