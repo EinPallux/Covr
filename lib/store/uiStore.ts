@@ -10,7 +10,7 @@ export interface GuideLine {
 
 const CANVAS_WIDTH = 1920
 const CANVAS_HEIGHT = 1080
-const ZOOM_MIN = 0.1
+const ZOOM_MIN = 0.05
 const ZOOM_MAX = 4.0
 const ZOOM_STEP = 0.1
 
@@ -26,6 +26,7 @@ interface UIState {
   snapEnabled: boolean
   panels: { layers: boolean; properties: boolean }
   guideLines: GuideLine[]
+  containerSize: { width: number; height: number }
 }
 
 interface UIActions {
@@ -41,9 +42,10 @@ interface UIActions {
   setGuideLines: (lines: GuideLine[]) => void
   clearGuideLines: () => void
   togglePanel: (panel: 'layers' | 'properties') => void
+  setContainerSize: (width: number, height: number) => void
 }
 
-export const useUIStore = create<UIState & UIActions>((set) => ({
+export const useUIStore = create<UIState & UIActions>((set, get) => ({
   zoom: 0.5,
   panOffset: { x: 0, y: 0 },
   activeTool: 'select',
@@ -51,6 +53,7 @@ export const useUIStore = create<UIState & UIActions>((set) => ({
   snapEnabled: true,
   panels: { layers: true, properties: true },
   guideLines: [],
+  containerSize: { width: 0, height: 0 },
 
   setZoom: (zoom) => set({ zoom: clampZoom(zoom) }),
 
@@ -69,19 +72,27 @@ export const useUIStore = create<UIState & UIActions>((set) => ({
     set({ zoom: clampZoom(zoom), panOffset: { x: 0, y: 0 } })
   },
 
-  resetZoom: () => set({ zoom: 1.0, panOffset: { x: 0, y: 0 } }),
+  resetZoom: () => {
+    const { containerSize } = get()
+    if (containerSize.width > 0) {
+      const padding = 80
+      const zoom = Math.min(
+        (containerSize.width - padding) / CANVAS_WIDTH,
+        (containerSize.height - padding) / CANVAS_HEIGHT,
+      )
+      set({ zoom: clampZoom(zoom), panOffset: { x: 0, y: 0 } })
+    } else {
+      set({ zoom: 0.5, panOffset: { x: 0, y: 0 } })
+    }
+  },
 
   setPanOffset: (panOffset) => set({ panOffset }),
-
   setActiveTool: (activeTool) => set({ activeTool }),
-
   setExporting: (isExporting) => set({ isExporting }),
-
   toggleSnap: () => set((s) => ({ snapEnabled: !s.snapEnabled })),
-
   setGuideLines: (guideLines) => set({ guideLines }),
   clearGuideLines: () => set({ guideLines: [] }),
-
   togglePanel: (panel) =>
     set((s) => ({ panels: { ...s.panels, [panel]: !s.panels[panel] } })),
+  setContainerSize: (width, height) => set({ containerSize: { width, height } }),
 }))

@@ -4,6 +4,7 @@ import { useEffect } from 'react'
 import type { Template } from '@/lib/templates/schema'
 import { useEditorStore } from '@/lib/store/editorStore'
 import { useHistoryStore } from '@/lib/store/historyStore'
+import { useKeyboardShortcuts } from '@/lib/hooks/useKeyboardShortcuts'
 import Toolbar from './Toolbar'
 import CanvasArea from './CanvasArea'
 import LayerPanel from './panels/LayerPanel'
@@ -17,7 +18,10 @@ export default function EditorShell({ template }: Props) {
   const { loadTemplate } = useEditorStore()
   const { clear: clearHistory } = useHistoryStore()
 
-  // Initialize editor state from the provided template
+  // Register all keyboard shortcuts
+  useKeyboardShortcuts()
+
+  // Load template into editor state on mount
   useEffect(() => {
     loadTemplate(template)
     clearHistory()
@@ -29,7 +33,7 @@ export default function EditorShell({ template }: Props) {
 
       <div className="flex flex-1 overflow-hidden">
         <LayerPanel />
-        <CanvasArea template={template} />
+        <CanvasArea />
         <PropertiesPanel />
       </div>
     </div>
