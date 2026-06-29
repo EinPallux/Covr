@@ -63,6 +63,7 @@ export function useKeyboardShortcuts() {
       // ── Tools ───────────────────────────────────────────────────────────
       if (e.key === 'v' || e.key === 'V') { ui.setActiveTool('select'); return }
       if (e.key === 'h' || e.key === 'H') { ui.setActiveTool('hand'); return }
+      if (e.key === 'c' || e.key === 'C') { ui.setActiveTool('comment'); return }
 
       // ── Zoom ────────────────────────────────────────────────────────────
       if (ctrl && (e.key === '=' || e.key === '+')) {

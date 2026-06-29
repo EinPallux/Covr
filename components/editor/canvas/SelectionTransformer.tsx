@@ -5,7 +5,7 @@ import { Transformer } from 'react-konva'
 import type Konva from 'konva'
 import { useEditorStore } from '@/lib/store/editorStore'
 import { withHistory } from '@/lib/store/historyStore'
-import type { Layer } from '@/lib/templates/schema'
+import type { Layer } from '@/lib/design/schema'
 
 interface Props {
   selectedIds: string[]

@@ -4,7 +4,7 @@ import { useRef, useEffect } from 'react'
 import { Image, Rect } from 'react-konva'
 import useImage from 'use-image'
 import type Konva from 'konva'
-import type { ImageLayer } from '@/lib/templates/schema'
+import type { ImageLayer } from '@/lib/design/schema'
 
 interface Props {
   layer: ImageLayer

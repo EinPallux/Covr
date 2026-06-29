@@ -1,5 +1,5 @@
 import { create } from 'zustand'
-import type { Layer } from '@/lib/templates/schema'
+import type { Layer } from '@/lib/design/schema'
 import { useEditorStore } from './editorStore'
 
 const MAX_HISTORY = 100
@@ -50,7 +50,15 @@ export const useHistoryStore = create<HistoryState & HistoryActions>((set, get) 
       future: [currentLayers, ...state.future],
     }))
 
-    useEditorStore.setState({ layers: JSON.parse(JSON.stringify(previous)), selectedIds: [] })
+    const restored = JSON.parse(JSON.stringify(previous)) as Layer[]
+    const editor = useEditorStore.getState()
+    useEditorStore.setState({
+      layers: restored,
+      selectedIds: [],
+      project: editor.project && editor.activePageId
+        ? { ...editor.project, pages: editor.project.pages.map((page) => page.id === editor.activePageId ? { ...page, layers: restored } : page) }
+        : editor.project,
+    })
   },
 
   redo: () => {
@@ -68,7 +76,15 @@ export const useHistoryStore = create<HistoryState & HistoryActions>((set, get) 
       past: [...state.past, currentLayers],
     }))
 
-    useEditorStore.setState({ layers: JSON.parse(JSON.stringify(next)), selectedIds: [] })
+    const restored = JSON.parse(JSON.stringify(next)) as Layer[]
+    const editor = useEditorStore.getState()
+    useEditorStore.setState({
+      layers: restored,
+      selectedIds: [],
+      project: editor.project && editor.activePageId
+        ? { ...editor.project, pages: editor.project.pages.map((page) => page.id === editor.activePageId ? { ...page, layers: restored } : page) }
+        : editor.project,
+    })
   },
 
   clear: () => set({ past: [], future: [] }),

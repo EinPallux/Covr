@@ -1,26 +1,26 @@
 'use client'
 
-import { useRef, useCallback, useEffect } from 'react'
-import { Stage, Layer } from 'react-konva'
+import React, { useRef, useCallback, useEffect } from 'react'
+import { Stage, Layer, Rect, Circle, Text } from 'react-konva'
 import type Konva from 'konva'
 import { useEditorStore } from '@/lib/store/editorStore'
 import { useUIStore } from '@/lib/store/uiStore'
 import { withHistory } from '@/lib/store/historyStore'
 import { stageRegistry } from '@/lib/export/stageRegistry'
-import type { Layer as EditorLayer, ShapeLayer } from '@/lib/templates/schema'
+import type { Layer as EditorLayer, ShapeLayer } from '@/lib/design/schema'
 import TextLayerNode from './TextLayerNode'
 import ImageLayerNode from './ImageLayerNode'
 import ShapeLayerNode from './ShapeLayerNode'
 import SelectionTransformer from './SelectionTransformer'
 
-const CANVAS_W = 1920
-const CANVAS_H = 1080
-
 interface Props {
   zoom: number
+  width: number
+  height: number
+  background: string
 }
 
-export default function CanvasStage({ zoom }: Props) {
+export default function CanvasStage({ zoom, width, height, background }: Props) {
   const stageRef = useRef<Konva.Stage>(null)
 
   // Register the stage so the export function can access it without prop drilling
@@ -37,7 +37,13 @@ export default function CanvasStage({ zoom }: Props) {
     toggleSelectedId,
     updateLayer,
     setEditingText,
+    moveGroup,
+    project,
+    activePageId,
+    addComment,
   } = useEditorStore()
+
+  const comments = project?.pages.find((page) => page.id === activePageId)?.comments ?? []
 
   const { activeTool } = useUIStore()
 
@@ -70,20 +76,25 @@ export default function CanvasStage({ zoom }: Props) {
       node.scaleX(1)
       node.scaleY(1)
     },
-    [updateLayer],
+    [updateLayer, width, height],
   )
 
   // ── Event handlers ─────────────────────────────────────────────────────────
 
   const handleStageMouseDown = useCallback(
     (e: Konva.KonvaEventObject<MouseEvent>) => {
-      // Clicked the stage background → deselect
+      if (activeTool === 'comment') {
+        const point = e.target.getStage()?.getPointerPosition()
+        const text = window.prompt('Add a comment')
+        if (point && text?.trim()) addComment(text.trim(), point.x / zoom, point.y / zoom)
+        return
+      }
       if (e.target === e.target.getStage()) {
         setSelectedIds([])
         setEditingText(null)
       }
     },
-    [setSelectedIds, setEditingText],
+    [activeTool, addComment, zoom, setSelectedIds, setEditingText],
   )
 
   const handleDragStart = useCallback(() => {
@@ -102,13 +113,18 @@ export default function CanvasStage({ zoom }: Props) {
       const snapshot = (useEditorStore.getState() as unknown as Record<string, unknown>)
         ._dragSnapshot as EditorLayer[] | undefined
 
-      if (snapshot) {
-        withHistory(() => syncNodeToStore(node, layer))
-      } else {
+      const commitMove = () => {
         syncNodeToStore(node, layer)
+        const updated = useEditorStore.getState().layers.find((item) => item.id === layerId)
+        if (layer.groupId && updated) {
+          moveGroup(layer.groupId, updated.x - layer.x, updated.y - layer.y, layer.id)
+        }
       }
+
+      if (snapshot) withHistory(commitMove)
+      else commitMove()
     },
-    [syncNodeToStore],
+    [syncNodeToStore, moveGroup],
   )
 
   const handleSelect = useCallback(
@@ -116,7 +132,13 @@ export default function CanvasStage({ zoom }: Props) {
       if (editingTextId) {
         setEditingText(null)
       }
-      if (multi) {
+      const clicked = useEditorStore.getState().layers.find((layer) => layer.id === id)
+      if (!multi && clicked?.groupId) {
+        const group = useEditorStore.getState().layers
+          .filter((layer) => layer.groupId === clicked.groupId)
+          .map((layer) => layer.id)
+        setSelectedIds(group)
+      } else if (multi) {
         toggleSelectedId(id, true)
       } else {
         setSelectedIds([id])
@@ -154,8 +176,8 @@ export default function CanvasStage({ zoom }: Props) {
   return (
     <Stage
       ref={stageRef}
-      width={CANVAS_W * zoom}
-      height={CANVAS_H * zoom}
+      width={width * zoom}
+      height={height * zoom}
       scaleX={zoom}
       scaleY={zoom}
       onMouseDown={handleStageMouseDown}
@@ -166,6 +188,7 @@ export default function CanvasStage({ zoom }: Props) {
     >
       {/* ── Content layer ─────────────────────────────────────────────────── */}
       <Layer>
+        <Rect id="__frame-background" width={width} height={height} fill={background} listening={false} />
         {layers.map((layer) => {
           if (!layer.visible) return null
 
@@ -204,6 +227,12 @@ export default function CanvasStage({ zoom }: Props) {
 
       {/* ── Transformer layer — separate to avoid content redraws ─────────── */}
       <Layer listening={false}>
+        {comments.map((comment, index) => (
+          <React.Fragment key={comment.id}>
+            <Circle x={comment.x} y={comment.y} radius={14 / zoom} fill="#10b981" shadowColor="#000" shadowBlur={8 / zoom} />
+            <Text x={comment.x - 14 / zoom} y={comment.y - 8 / zoom} width={28 / zoom} text={String(index + 1)} align="center" fontSize={12 / zoom} fontStyle="bold" fill="#052e16" />
+          </React.Fragment>
+        ))}
         <SelectionTransformer
           selectedIds={selectedIds}
           layers={layers}

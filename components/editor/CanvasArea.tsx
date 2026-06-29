@@ -4,23 +4,37 @@ import { useRef, useEffect, useCallback } from 'react'
 import dynamic from 'next/dynamic'
 import { useEditorStore } from '@/lib/store/editorStore'
 import { useUIStore } from '@/lib/store/uiStore'
-import type { TextLayer } from '@/lib/templates/schema'
+import type { TextLayer } from '@/lib/design/schema'
 import TextEditOverlay from './canvas/TextEditOverlay'
 
 // Konva requires DOM — never SSR
 const CanvasStage = dynamic(() => import('./canvas/CanvasStage'), { ssr: false })
 
-const CANVAS_W = 1920
-const CANVAS_H = 1080
-
 export default function CanvasArea() {
   const outerRef = useRef<HTMLDivElement>(null)
-  const { zoom, activeTool, setContainerSize, fitToScreen } = useUIStore()
-  const { editingTextId, layers } = useEditorStore()
+  const { zoom, activeTool, setContainerSize, setCanvasSize, fitToScreen } = useUIStore()
+  const { editingTextId, layers, project, activePageId } = useEditorStore()
+  const activePage = project?.pages.find((page) => page.id === activePageId)
+  const canvasWidth = activePage?.width ?? 1080
+  const canvasHeight = activePage?.height ?? 1080
+  const canvasBackground = activePage?.background ?? '#ffffff'
 
   const editingLayer = editingTextId
     ? (layers.find((l) => l.id === editingTextId) as TextLayer | undefined)
     : undefined
+
+  useEffect(() => {
+    setCanvasSize(canvasWidth, canvasHeight)
+    const frame = requestAnimationFrame(() => {
+      fitToScreen()
+      const container = outerRef.current
+      if (container) {
+        container.scrollLeft = (container.scrollWidth - container.clientWidth) / 2
+        container.scrollTop = (container.scrollHeight - container.clientHeight) / 2
+      }
+    })
+    return () => cancelAnimationFrame(frame)
+  }, [canvasWidth, canvasHeight, setCanvasSize, fitToScreen])
 
   // ── Report container size to uiStore for fit-to-screen ───────────────────
   useEffect(() => {
@@ -130,8 +144,8 @@ export default function CanvasArea() {
     }
   }, [])
 
-  const canvasW = CANVAS_W * zoom
-  const canvasH = CANVAS_H * zoom
+  const canvasW = canvasWidth * zoom
+  const canvasH = canvasHeight * zoom
 
   return (
     <div
@@ -154,7 +168,7 @@ export default function CanvasArea() {
           className="relative shrink-0 shadow-2xl shadow-black/60 ring-1 ring-zinc-700/40"
           style={{ width: canvasW, height: canvasH }}
         >
-          <CanvasStage zoom={zoom} />
+          <CanvasStage zoom={zoom} width={canvasWidth} height={canvasHeight} background={canvasBackground} />
 
           {editingLayer && (
             <TextEditOverlay layer={editingLayer} zoom={zoom} />

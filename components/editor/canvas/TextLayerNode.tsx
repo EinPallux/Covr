@@ -3,7 +3,7 @@
 import { useRef, useEffect } from 'react'
 import { Text } from 'react-konva'
 import type Konva from 'konva'
-import type { TextLayer } from '@/lib/templates/schema'
+import type { TextLayer } from '@/lib/design/schema'
 
 interface Props {
   layer: TextLayer

@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from 'react'
 import { useEditorStore } from '@/lib/store/editorStore'
 import { useUIStore } from '@/lib/store/uiStore'
 import { withHistory } from '@/lib/store/historyStore'
-import type { Layer, TextLayer, ImageLayer, ShapeLayer } from '@/lib/templates/schema'
+import type { Layer, TextLayer, ImageLayer, ShapeLayer } from '@/lib/design/schema'
 import { cn } from '@/lib/utils/cn'
 
 // ─── Field Primitives ────────────────────────────────────────────────────────
@@ -366,7 +366,8 @@ function ShapeSection({ layer }: { layer: ShapeLayer }) {
 // ─── Root component ──────────────────────────────────────────────────────────
 
 export default function PropertiesPanel() {
-  const { layers, selectedIds } = useEditorStore()
+  const { layers, selectedIds, project, activePageId, setPageBackground, removeComment } = useEditorStore()
+  const activePage = project?.pages.find((page) => page.id === activePageId)
   const { panels } = useUIStore()
 
   if (!panels.properties) return null
@@ -385,13 +386,33 @@ export default function PropertiesPanel() {
       </div>
 
       {/* Content */}
-      <div className={cn('flex-1 overflow-y-auto', !selectedLayer && 'flex items-center justify-center')}>
+      <div className={cn('flex-1 overflow-y-auto', !selectedLayer && selectedIds.length > 0 && 'flex items-center justify-center')}>
         {!selectedLayer ? (
-          <p className="px-4 text-center text-xs text-zinc-600">
-            {selectedIds.length > 1
-              ? `${selectedIds.length} layers selected`
-              : 'Select a layer to edit'}
-          </p>
+          selectedIds.length > 1 ? (
+            <div className="px-4 text-center text-xs text-zinc-500">
+              <p>{selectedIds.length} layers selected</p>
+              <p className="mt-1 text-[10px] text-zinc-700">Use Ctrl+G to group them</p>
+            </div>
+          ) : (
+            <div className="w-full self-start">
+              <Section title="Frame">
+                <div className="grid grid-cols-2 gap-2 text-xs text-zinc-400">
+                  <div><FieldLabel>Width</FieldLabel><p className="mt-1 rounded border border-zinc-800 bg-zinc-950 px-2 py-1.5">{activePage?.width ?? 0}px</p></div>
+                  <div><FieldLabel>Height</FieldLabel><p className="mt-1 rounded border border-zinc-800 bg-zinc-950 px-2 py-1.5">{activePage?.height ?? 0}px</p></div>
+                </div>
+                <div className="mt-3 flex flex-col gap-1">
+                  <FieldLabel>Background</FieldLabel>
+                  <input type="color" value={activePage?.background ?? '#ffffff'} onChange={(event) => setPageBackground(event.target.value)} className="h-8 w-full cursor-pointer rounded border border-zinc-700 bg-zinc-800 px-1" />
+                </div>
+                <div className="mt-4 border-t border-zinc-800 pt-3">
+                  <div className="flex items-center justify-between"><FieldLabel>Comments</FieldLabel><span className="text-[10px] text-zinc-700">Press C to add</span></div>
+                  <div className="mt-2 space-y-1.5">
+                    {(activePage?.comments ?? []).length === 0 ? <p className="text-[10px] text-zinc-700">No comments on this page.</p> : (activePage?.comments ?? []).map((comment, index) => <div key={comment.id} className="flex items-start gap-2 rounded border border-zinc-800 bg-zinc-950/60 p-2"><span className="flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-emerald-500 text-[9px] font-bold text-emerald-950">{index + 1}</span><p className="min-w-0 flex-1 text-[10px] leading-relaxed text-zinc-400">{comment.text}</p><button onClick={() => removeComment(comment.id)} className="text-zinc-700 hover:text-red-400">×</button></div>)}
+                  </div>
+                </div>
+              </Section>
+            </div>
+          )
         ) : (
           <>
             <TransformSection layer={selectedLayer} />

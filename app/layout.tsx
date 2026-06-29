@@ -10,15 +10,15 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: {
-    default: 'Covr — Free Minecraft Marketplace Cover Editor',
+    default: 'Covr — Social Graphics Editor',
     template: '%s | Covr',
   },
   description:
-    'Create stunning Minecraft Marketplace cover art for free. Browser-based editor — no account, no backend, no cost.',
-  keywords: ['minecraft', 'marketplace', 'cover art', 'template editor', 'free', 'builtbybit'],
+    'Create social media graphics in a fast, local-first browser editor. Free, open source, and no account required.',
+  keywords: ['social media graphics', 'design editor', 'local-first', 'open source', 'free'],
   openGraph: {
-    title: 'Covr — Free Minecraft Marketplace Cover Editor',
-    description: 'Create stunning Minecraft Marketplace cover art for free.',
+    title: 'Covr — Social Graphics Editor',
+    description: 'Create social media graphics locally in your browser.',
     type: 'website',
   },
 }

@@ -3,7 +3,7 @@
 import { useEffect, useRef } from 'react'
 import { useEditorStore } from '@/lib/store/editorStore'
 import { withHistory } from '@/lib/store/historyStore'
-import type { TextLayer } from '@/lib/templates/schema'
+import type { TextLayer } from '@/lib/design/schema'
 
 interface Props {
   layer: TextLayer

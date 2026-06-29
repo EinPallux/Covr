@@ -2,7 +2,7 @@
 
 import { Rect, Ellipse, Line } from 'react-konva'
 import type Konva from 'konva'
-import type { ShapeLayer } from '@/lib/templates/schema'
+import type { ShapeLayer } from '@/lib/design/schema'
 
 interface Props {
   layer: ShapeLayer

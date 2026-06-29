@@ -1,6 +1,5 @@
-import { templateManifest } from '@/lib/templates/registry'
-import GalleryPageContent from '@/components/gallery/GalleryPageContent'
+import ProjectHome from '@/components/home/ProjectHome'
 
 export default function HomePage() {
-  return <GalleryPageContent templates={templateManifest} />
+  return <ProjectHome />
 }

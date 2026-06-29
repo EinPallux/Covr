@@ -32,8 +32,8 @@ import {
 import { useEditorStore } from '@/lib/store/editorStore'
 import { useUIStore } from '@/lib/store/uiStore'
 import { withHistory } from '@/lib/store/historyStore'
-import { makeTextLayer, makeImageLayer, makeShapeLayer } from '@/lib/templates/schema'
-import type { Layer } from '@/lib/templates/schema'
+import { makeTextLayer, makeImageLayer, makeShapeLayer } from '@/lib/design/schema'
+import type { Layer } from '@/lib/design/schema'
 import IconButton from '@/components/ui/IconButton'
 import { cn } from '@/lib/utils/cn'
 
@@ -158,7 +158,8 @@ function SortableLayerItem({ layer, isSelected }: LayerItemProps) {
       <Icon className={cn('h-3.5 w-3.5 shrink-0', iconColor)} />
 
       {/* Name */}
-      <span className="min-w-0 flex-1 truncate text-xs">{layer.name}</span>
+      <span className={cn('min-w-0 flex-1 truncate text-xs', layer.groupId && 'pl-2')}>{layer.name}</span>
+      {layer.groupId && <span className="rounded bg-zinc-700 px-1 text-[8px] uppercase text-zinc-400">group</span>}
 
       {/* Row actions — visible on hover or selection */}
       <div
@@ -244,7 +245,7 @@ export default function LayerPanel() {
   if (!panels.layers) return null
 
   return (
-    <div className="flex w-56 shrink-0 flex-col border-r border-zinc-800 bg-zinc-900">
+    <div className="flex min-h-0 flex-1 flex-col bg-zinc-900">
       {/* Header */}
       <div className="flex h-10 shrink-0 items-center justify-between border-b border-zinc-800 px-3">
         <span className="text-[11px] font-semibold uppercase tracking-widest text-zinc-500">
